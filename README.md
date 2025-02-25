@@ -3,7 +3,7 @@
 
 
 ## Highlights:
-This is a sample POM framework to automate Amazon Android app.
+This is a sample POM framework to automate Android app.
 
 ## Running Tests
 Can be run from IntelliJ the way tests normally are run
@@ -37,6 +37,3 @@ Open the solution
 Rebuild
 
 Run the test
-
-#### Note: 
-Currently all the elements found have been kept on two pages AmazonHomePageAndroid , LandingPageAndroid and same goes for test cases.

@@ -10,6 +10,7 @@ import org.testng.Assert;
 import io.qameta.allure.Step;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TouchInteractionPageAndroid extends ScreenBase {
@@ -41,7 +42,9 @@ public class TouchInteractionPageAndroid extends ScreenBase {
                 PointerInput.Origin.viewport(), centerX, centerY));
         tap.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
         tap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-        driver.perform(List.of(tap));
+        List<Sequence> actions = new ArrayList<>();
+        actions.add(tap);
+        driver.perform(actions);
     }
 
     public void performDoubleTap() {
@@ -63,7 +66,9 @@ public class TouchInteractionPageAndroid extends ScreenBase {
         doubleTap.addAction(new Pause(finger, Duration.ofMillis(100)));
         doubleTap.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
 
-        driver.perform(List.of(doubleTap));
+        List<Sequence> actions = new ArrayList<>();
+        actions.add(doubleTap);
+        driver.perform(actions);
     }
 
     public void performDragAndDrop() {

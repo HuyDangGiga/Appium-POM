@@ -1,5 +1,6 @@
 package base;
 
+import org.jetbrains.annotations.NotNull;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
@@ -7,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ScreenBase extends TestBase {
@@ -103,7 +105,9 @@ public class ScreenBase extends TestBase {
         System.out.println("ending location: " + (GetMidXofElement(element)-offset) + " - " + GetMidYofElement(element));
         scroll.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
         // Perform the swipe action
-        driver.perform(List.of(scroll));
+        List<Sequence> actions = new ArrayList<>();
+        actions.add(scroll);
+        driver.perform(actions);
     }
 
     public void DragAndDrop(WebElement source, WebElement target, int offset){
@@ -126,11 +130,13 @@ public class ScreenBase extends TestBase {
         dragNDrop.addAction(finger.createPointerMove(Duration.ofMillis(700),
                 PointerInput.Origin.viewport(),centerX2, centerY2 + offset));
         dragNDrop.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-        driver.perform(List.of(dragNDrop));
+        List<Sequence> actions = new ArrayList<>();
+        actions.add(dragNDrop);
+        driver.perform(actions);
         System.out.println("Move to:" + centerX2 + "-" + centerY2 + offset);
     }
 
-    public void DragDownAndDrop(WebElement source, int offset){
+    public void DragDownAndDrop(@NotNull WebElement source, int offset){
         Point sourceLocation = source.getLocation();
         Dimension sourceSize = source.getSize();
         int centerX = sourceLocation.getX() + sourceSize.getWidth() / 2;
@@ -145,7 +151,9 @@ public class ScreenBase extends TestBase {
         dragNDrop.addAction(finger.createPointerMove(Duration.ofMillis(700),
                 PointerInput.Origin.viewport(),centerX, offset));
         dragNDrop.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-        driver.perform(List.of(dragNDrop));
+        List<Sequence> actions = new ArrayList<>();
+        actions.add(dragNDrop);
+        driver.perform(actions);
         System.out.println("Move to:" + centerX + "-" + offset);
     }
 
@@ -179,7 +187,9 @@ public class ScreenBase extends TestBase {
             scroll.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
             scroll.addAction(finger.createPointerMove(Duration.ofMillis(600), PointerInput.Origin.viewport(), startX, endY));
             scroll.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-            driver.perform(List.of(scroll));
+            List<Sequence> actions = new ArrayList<>();
+            actions.add(scroll);
+            driver.perform(actions);
         } else {
             System.out.println("XY Coordinates are not invalid! must lower than 8 ");
         }
@@ -211,6 +221,8 @@ public class ScreenBase extends TestBase {
         scroll.addAction(finger.createPointerDown(PointerInput.MouseButton.LEFT.asArg()));
         scroll.addAction(finger.createPointerMove(Duration.ofMillis(600), PointerInput.Origin.viewport(), endX, startY));
         scroll.addAction(finger.createPointerUp(PointerInput.MouseButton.LEFT.asArg()));
-        driver.perform(List.of(scroll));
+        List<Sequence> actions = new ArrayList<>();
+        actions.add(scroll);
+        driver.perform(actions);
     }
 }
